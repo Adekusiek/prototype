@@ -1,7 +1,5 @@
 class FriendshipsController < ApplicationController
   def index
-    @friends = current_user.friends
-    @pendingfriends = current_user.pendingfrineds
   end
 
   def destroy

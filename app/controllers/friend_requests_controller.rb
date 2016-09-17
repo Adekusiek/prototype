@@ -14,7 +14,11 @@ end
 
 def destroy
     friendrequest = Friendrequest.find_by(user_id: params[:id], friend_id: current_user.id)
-    friendrequest.decline
+    if friendrequest.status == "pending"
+      friendrequest.decline
+    else
+      friendrequest.destroy
+    end
     redirect_to users_path
 end
 

@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_many :friends, through: :friendships,
             after_add: :create_complement_friendship
   has_many :friendrequests
-  has_many :pending_friends, through: :friendrequests,  source: :friend
+  has_many :pending_friends, through: :friendrequests, source: :friend
 
 # paperclip configuration
   has_attached_file :avatar, styles: { medium: "200x200>", thumb: "100x100>"}
