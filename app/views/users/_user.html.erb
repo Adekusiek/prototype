@@ -1,0 +1,26 @@
+<% unless user.id == current_user.id %>
+  <div class="row form user_profile">
+    <div class="col-lg-12">
+    <div class="image" style="background-image: url(<%= user.avatar.url(:medium) %>);"></div>
+      <h2><%= user.nickname %></h2>
+      <% if current_user.friends(user).exists? %>
+         <%= link_to '友達から削除', friendship_path(user), {:class => 'btn btn-primary withripple', method: :delete } %>
+      <% elsif user.friendrequests.where(friend_id: current_user.id).exists? %>
+        <% if user.friendrequests.find_by(friend_id: current_user.id).status == "pending" %>
+          <ul>
+            <li><%= link_to '申請許可', friend_request_path(id: user.id, friend_id: current_user.id), {:class => 'btn btn-primary withripple', method: :patch } %></li>
+            <li><%= link_to '申請却下', friend_request_path(id: user.id, friend_id: current_user.id), {:class => 'btn btn-primary withripple', method: :delete } %></li>
+          </ul>
+        <% else %>
+            <%= link_to '申請却下しました', friend_request_path(id: user.id, friend_id: current_user.id), {:class => 'btn btn-primary withripple', method: :delete } %>
+        <% end %>
+     <% else %>
+        <% unless current_user.friendrequests(friend_id: user.id).exists? %>
+          <%= link_to '友達に追加', friend_requests_path(friend_id: user.id), {:class => 'btn btn-primary withripple', method: :post } %>
+        <% else %>
+          <%= link_to '友達に申請中', "#", {:class => 'btn btn-primary withripple', method: :delete } %>
+        <% end %>
+     <% end %>
+    </div>
+  </div>
+<% end %>
