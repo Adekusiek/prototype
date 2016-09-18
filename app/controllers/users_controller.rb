@@ -19,6 +19,10 @@ class UsersController < ApplicationController
     redirect_to user_path(current_user)
   end
 
+  def search
+    @users = User.where('nickname LIKE(?)', "#{params[:keyword]}%")
+  end
+
   private
   def update_params
     params.require(:user).permit(:family_name, :first_name, :avatar)

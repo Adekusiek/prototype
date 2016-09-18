@@ -4,6 +4,7 @@
     <h2><%= @user.nickname %></h2>
     <% if current_user.id == @user.id %>
     <%= link_to 'プロフィール編集', edit_user_path(current_user), {:class => 'btn btn-primary withripple' }%>
+    <%= link_to '友達一覧', friendships_path %>
     <% end %>
   </div>
 </div>
@@ -51,7 +52,7 @@
 <br/>
 
 <h3>Planned schedule </h3>
-<% if current_user.friends.exists?(@user) %>
+<% if current_user.friends.exists?(@user) || current_user.id = @user.id %>
   <% if @going_events %>
     <% @going_events.each do |going_event| %>
     <tr>

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   root 'top#index'
+  get 'users/search' => 'users#search', as: "users_search"
   resources :users, only: [:index, :show, :edit, :update]
   resources :friend_requests
   resources :friendships, only: [:index, :destroy]
