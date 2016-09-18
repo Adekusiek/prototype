@@ -1,9 +1,64 @@
 <div class="row form user_profile">
   <div class="col-lg-12">
   <div class="image" style="background-image: url(<%= @user.avatar.url(:medium) %>);"></div>
-    <h2><%= @user.name %></h2>
+    <h2><%= @user.nickname %></h2>
     <% if current_user.id == @user.id %>
     <%= link_to 'プロフィール編集', edit_user_path(current_user), {:class => 'btn btn-primary withripple' }%>
     <% end %>
   </div>
 </div>
+
+<% unless current_user.id == @user.id || current_user.friends.exists?(@user) %>
+    <% if @user.friendrequests.exists?(friend_id: current_user.id, status: "pending") %>
+      <tr>
+        <td><%= link_to '申請許可', friend_request_path(id: @user.id, friend_id: current_user.id), method: :patch %></td>
+        <td><%= link_to '申請却下', friend_request_path(id: @user.id, friend_id: current_user.id), method: :delete %></td>
+      </tr>
+    <% elsif @user.friendrequests.exists?(friend_id: current_user.id, status: "declined") %>
+      <%= link_to '申請却下を取り消す', friend_request_path(id: @user.id, friend_id: current_user.id), {:class => 'btn btn-primary withripple', method: :delete } %>
+    <% elsif !current_user.friendrequests.exists?(friend_id: @user.id) %>
+      <%= link_to '友達に追加', friend_requests_path(friend_id: @user.id), {:class => 'btn btn-primary withripple', method: :post } %>
+    <% elsif current_user.friendrequests.exists?(friend_id: @user.id) %>
+      <p>友達に申請中</p>
+    <% end %>
+<% end %>
+
+<% if current_user.id == @user.id %>
+  <h3>What's new? </h3>
+  <% if @pending_events.present? %>
+    <h4>invited event</h4>
+    <% @pending_events.each do |pending_event| %>
+    <tr>
+      <td><%= pending_event.title %></td>
+      <td><%= link_to 'Going', accept_invitation_path(pending_event), method: :patch %></td>
+      <td><%= link_to 'Decline', decline_invitation_path(pending_event), method: :patch %></td>
+    </tr>
+    <% end %>
+    <br/>
+  <% end %>
+
+  <% if @pending_friends.present? %>
+    <h4>friend requests</h4>
+    <% @pending_friends.each do |pending_friend| %>
+    <tr>
+      <td><%= link_to pending_friend.nickname, user_path(pending_friend) %></td>
+      <td><%= link_to '申請許可', friend_request_path(id: pending_friend.id, friend_id: current_user.id), method: :patch %></td>
+      <td><%= link_to '申請却下', friend_request_path(id: pending_friend.id, friend_id: current_user.id), method: :delete %></td>
+    </tr>
+    <% end %>
+  <% end %>
+<% end %>
+<br/>
+
+<h3>Planned schedule </h3>
+<% if current_user.friends.exists?(@user) %>
+  <% if @going_events %>
+    <% @going_events.each do |going_event| %>
+    <tr>
+      <td><%= link_to going_event.title, event_path(going_event) %></td>
+    </tr>
+    <% end %>
+  <% end %>
+<% else %>
+  <p>You must befriend with him to see his schedule !!</p>
+<% end %>

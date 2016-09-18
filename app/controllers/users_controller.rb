@@ -5,7 +5,10 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(current_user)
+    @user = User.find(params[:id])
+    @going_events = @user.going_events
+    @pending_events = @user.pending_events
+    @pending_friends = @user.pending_friends
   end
 
   def edit

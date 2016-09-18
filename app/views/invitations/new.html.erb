@@ -1,0 +1,10 @@
+<h3> Your ininvited friends </h3>
+
+<% @friends.each do |friend| %>
+  <% unless friend.invitations.exists?(event_id: params[:id]) %>
+  <tr>
+    <td><%= friend.nickname %></td>
+    <td><%= link_to "Invite", create_invitation_path(id: params[:id], user_id: friend.id), method: :post %></td>
+  </tr>
+  <% end %>
+<% end %>
