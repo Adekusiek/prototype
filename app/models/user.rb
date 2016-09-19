@@ -8,11 +8,21 @@ class User < ActiveRecord::Base
   validates :nickname, uniqueness: true
 
 # Association
-  has_many :friendships
+  #for friendship model
+  has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships,
             after_add: :create_complement_friendship
-  has_many :friendrequests
-  has_many :pending_friends, through: :friendrequests, source: :friend
+  has_many :friendrequests, dependent: :destroy
+  has_many :pending_friendrequests, ->{where status: "pending"}, class_name: "Friendrequest", foreign_key: "friend_id"
+  has_many :pending_friends, through: :pending_friendrequests, source: :user
+
+  #for event invitation model
+  has_many :invitations, dependent: :destroy
+  has_many :going_invitations, ->{where status: "accepted"}, class_name: "Invitation"
+  has_many :pending_invitations, ->{where status: "pending"}, class_name: "Invitation"
+  has_many :going_events, through: :going_invitations, source: :event
+  has_many :pending_events, through: :pending_invitations, source: :event
+
 
 # paperclip configuration
   has_attached_file :avatar, styles: { medium: "200x200>", thumb: "100x100>"}
