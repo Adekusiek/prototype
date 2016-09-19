@@ -1,8 +1,5 @@
 class InvitationsController < ApplicationController
-  def index
-    # @goingusers = Event.find(params[:id]).invitations.where(status: "accepted").???
-    # @invitedusers = Event.find(params[:id]).invitations.
-  end
+
 
   def new
       @friends = current_user.friends
@@ -13,19 +10,19 @@ class InvitationsController < ApplicationController
 
   def create
     Invitation.create(invitation_params)
-    redirect_to invitations_path(params[:id])
+    redirect_to new_invitation_path(params[:id])
   end
 
   def accept
     invitation = current_user.invitations.find_by(event_id: params[:id], status: "pending")
     invitation.update(status: "accepted")
-    redirect_to root_path
+    redirect_to event_path(params[:id])
   end
 
   def decline
     invitation = current_user.invitations.find_by(event_id: params[:id], status: "pending")
     invitation.update(status: "declined")
-    redirect_to root_path
+    redirect_to event_path(params[:id])
   end
 
   def destroy

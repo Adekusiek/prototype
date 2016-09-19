@@ -1,5 +1,19 @@
 <p id="notice"><%= notice %></p>
 
+<% if @event.invitations.find_by(user_id: current_user.id, administrator: true) %>
+  <td><%= link_to 'Edit', edit_event_path(@event) %></td>
+  <td><%= link_to 'Destroy', @event, method: :delete %></td>
+<% end %>
+<% if @event.going_users.find_by(id: current_user.id) %>
+  <td><%= link_to 'Add Participants', new_invitation_path(@event) %></td>
+<% end %>
+<% if @event.invitations.exists?(user_id: current_user.id, status: "accepted", administrator: false) %>
+  <td><%= link_to 'NotGoin', destroy_invitation_path(@event), method: :delete %></td>
+<% elsif @event.invitations.exists?(user_id: current_user.id, status: "pending", administrator: false) %>
+  <td><%= link_to 'Going', accept_invitation_path(@event), method: :patch %></td>
+  <td><%= link_to 'Decline', decline_invitation_path(@event), method: :patch %></td>
+<% end %>
+
 <p>
   <strong>Title:</strong>
   <%= @event.title %>
@@ -16,14 +30,24 @@
 </p>
 
 <p>
-  <strong>Allday:</strong>
-  <%= @event.allDay %>
-</p>
-
-<p>
   <strong>Description:</strong>
   <%= @event.description %>
 </p>
 
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+<% if @event.going_users.exists? %>
+  <h2>Participants</h2>
+  <% @event.going_users.each do |going_user| %>
+    <%= link_to going_user.nickname, user_path(going_user) %>
+  <% end %>
+<% end %>
+
+<% if @event.pending_users.exists? %>
+  <h2>Invited memebers</h2>
+  <% @event.pending_users.each do |pending_user| %>
+    <%= link_to pending_user.nickname, user_path(pending_user) %>
+  <% end %>
+<% end %>
+
+<p></p>
+
+<p><%= link_to 'Back', events_path %></p>
