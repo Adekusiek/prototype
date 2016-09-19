@@ -2,4 +2,6 @@
   <input name="keyword" placeholder="input nickname" type="text" value=""><button class="btn-search" title="検索" type="submit"><i class="icon-search"></i></button></input>
 <% end %>
 
-<%= render @users %>
+<% if @users %>
+  <%= render @users %>
+<% end %>

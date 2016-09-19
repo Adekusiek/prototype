@@ -20,7 +20,10 @@ class UsersController < ApplicationController
   end
 
   def search
-    @users = User.where('nickname LIKE(?)', "#{params[:keyword]}%")
+    keyword = params[:keyword]
+    if keyword.present?
+      @users = User.search(:family_name_or_first_name_or_nickname_start =>  keyword).result
+    end
   end
 
   private

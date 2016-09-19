@@ -5,9 +5,6 @@ class InvitationsController < ApplicationController
       @friends = current_user.friends
   end
 
-  def show
-  end
-
   def create
     Invitation.create(invitation_params)
     redirect_to new_invitation_path(params[:id])
