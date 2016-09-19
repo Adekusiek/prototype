@@ -8,6 +8,7 @@ class InvitationsController < ApplicationController
       event.watched_users.each do |watched_user|
         @events += watched_user.going_events
       end
+      gon.event_id = event.id  #For javascript
   end
 
   def create

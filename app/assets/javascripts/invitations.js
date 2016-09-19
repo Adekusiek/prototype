@@ -25,6 +25,6 @@ $(document).ready(function() {
       minTime: "00:00:00", //スケジュールの開始時間
       maxTime: "24:00:00", //スケジュールの最終時間
 
-      // events: "/events/#{params[:id]}/invitation/new",
+      events: "/events/" + gon.event_id + "/invitation/new",
     });
 });
