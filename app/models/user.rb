@@ -23,6 +23,8 @@ class User < ActiveRecord::Base
   has_many :going_events, through: :going_invitations, source: :event
   has_many :pending_events, through: :pending_invitations, source: :event
 
+  #for friend schedule obervation model
+  has_many :user_watches, dependent: :destroy
 
 # paperclip configuration
   has_attached_file :avatar, styles: { medium: "200x200>", thumb: "100x100>"}

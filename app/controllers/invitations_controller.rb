@@ -3,6 +3,11 @@ class InvitationsController < ApplicationController
 
   def new
       @friends = current_user.friends
+      event = Event.find(params[:id])
+      @events = []
+      event.watched_users.each do |watched_user|
+        @events += watched_user.going_events
+      end
   end
 
   def create

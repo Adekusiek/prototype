@@ -1,10 +1,10 @@
 $(document).ready(function() {
-    $('#calendar').fullCalendar({
+    $('#calendar_invitation').fullCalendar({
 
       header: {
               left: 'prev,next today',
               center: 'title',
-              right: 'month,agendaWeek'
+              right: 'agendaWeek, agendaDay'
           },
       eventLimit: true, // allow "more" link when too many events
       eventLimitText:'その他',
@@ -12,6 +12,7 @@ $(document).ready(function() {
 
       //月曜日開始
       firstDay:1,
+
       weekends:true,
       //終日スロットル表示
       allDaySlot:true,
@@ -24,6 +25,6 @@ $(document).ready(function() {
       minTime: "00:00:00", //スケジュールの開始時間
       maxTime: "24:00:00", //スケジュールの最終時間
 
-      events: '/events.json',
+      // events: "/events/#{params[:id]}/invitation/new",
     });
 });

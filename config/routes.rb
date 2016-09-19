@@ -12,7 +12,14 @@ Rails.application.routes.draw do
   patch 'events/:id/invitation/accept' => 'invitations#accept', as: "accept_invitation"
   patch 'events/:id/invitation/decline' => 'invitations#decline', as: "decline_invitation"
   delete 'events/:id/invitation/destroy' => 'invitations#destroy', as: "destroy_invitation"
+  # post 'user_watches/add' => "user_watches#add", as:"user_watches_add"
+  # delete 'user_watches/remove' => "user_watches#remove", as:"user_watches_remove"
 
-  resources :events
+  resources :events do
+    member do
+      post 'add_watches' => "user_watches#add"
+      delete 'remove_watches' => "user_watches#remove"
+    end
+  end
 
 end
