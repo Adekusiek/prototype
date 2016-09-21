@@ -1,7 +1,6 @@
 if(typeof gon.url !== 'undefined'){
 var watchedevent = {
                   url: gon.url + ".json",
-                  color: 'red'
                           };
     }
 
