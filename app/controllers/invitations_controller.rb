@@ -4,11 +4,12 @@ class InvitationsController < ApplicationController
   def new
       @friends = current_user.friends
       event = Event.find(params[:id])
+      gon.url = new_invitation_path(event)  #For javascript
       @events = []
       event.watched_users.each do |watched_user|
         @events += watched_user.going_events
       end
-      gon.event_id = event.id  #For javascript
+      @events << event
   end
 
   def create

@@ -1,5 +1,13 @@
+if(typeof gon.url !== 'undefined'){
+var watchedevent = {
+                  url: gon.url + ".json",
+                  color: 'red'
+                          };
+    }
+
 $(document).ready(function() {
-    $('#calendar_invitation').fullCalendar({
+
+    $('#watchedcalendar').fullCalendar({
 
       header: {
               left: 'prev,next today',
@@ -24,7 +32,11 @@ $(document).ready(function() {
       scrollTime:'16:00:00',
       minTime: "00:00:00", //スケジュールの開始時間
       maxTime: "24:00:00", //スケジュールの最終時間
+      // $('#calendarmasu').fullCalendar( 'removeEventSource', myevent )
+      //             .fullCalendar( 'addEventSource', friendevent );;
 
-      events: "/events/" + gon.event_id + "/invitation/new",
+      eventSources: [
+        watchedevent
+      ]
     });
 });

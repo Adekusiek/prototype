@@ -1,4 +1,10 @@
+// this myevent should be outside of (document).ready function so that it wont conflict with invitation.js
+var  myevent = {
+          url: '/events.json'
+        };
+
 $(document).ready(function() {
+
     $('#calendar').fullCalendar({
 
       header: {
@@ -24,6 +30,9 @@ $(document).ready(function() {
       minTime: "00:00:00", //スケジュールの開始時間
       maxTime: "24:00:00", //スケジュールの最終時間
 
-      events: '/events.json',
+      // events: '/events.json'
+      eventSources: [
+        myevent
+      ]
     });
 });
