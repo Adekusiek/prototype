@@ -11,7 +11,7 @@ $(document).ready(function() {
       header: {
               left: 'prev,next today',
               center: 'title',
-              right: 'agendaWeek, agendaDay'
+              right: 'month, agendaWeek, agendaDay'
           },
       eventLimit: true, // allow "more" link when too many events
       eventLimitText:'その他',
@@ -33,7 +33,7 @@ $(document).ready(function() {
       maxTime: "24:00:00", //スケジュールの最終時間
       // $('#calendarmasu').fullCalendar( 'removeEventSource', myevent )
       //             .fullCalendar( 'addEventSource', friendevent );;
-
+      defaultView: 'agendaWeek',
       eventSources: [
         watchedevent
       ]
