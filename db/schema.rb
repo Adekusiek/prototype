@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160922051314) do
+ActiveRecord::Schema.define(version: 20160922074025) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "text",       limit: 65535
@@ -54,6 +54,20 @@ ActiveRecord::Schema.define(version: 20160922051314) do
     t.boolean  "administrator",             default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "posters", force: :cascade do |t|
+    t.text     "title",      limit: 65535
+    t.text     "detail",     limit: 65535
+    t.text     "place",      limit: 65535
+    t.text     "address",    limit: 65535
+    t.string   "date",       limit: 255
+    t.string   "time",       limit: 255
+    t.text     "image_url",  limit: 65535
+    t.text     "link_url",   limit: 65535
+    t.string   "reference",  limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "user_watches", force: :cascade do |t|
