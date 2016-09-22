@@ -10,4 +10,8 @@ class Event < ActiveRecord::Base
   #for friend schedule observation model
   has_many :user_watches, dependent: :destroy
   has_many :watched_users, through: :user_watches, source: :user
+
+  #for comments on event model
+  has_many :comments, ->{ order("created_at ASC")}, dependent: :destroy
+
 end

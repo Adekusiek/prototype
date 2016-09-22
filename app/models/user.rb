@@ -26,6 +26,9 @@ class User < ActiveRecord::Base
   #for friend schedule obervation model
   has_many :user_watches, dependent: :destroy
 
+  #for comments on event model
+  has_many :comments, dependent: :destroy
+
 # paperclip configuration
   has_attached_file :avatar, styles: { medium: "200x200>", thumb: "100x100>"}
   validates_attachment_content_type :avatar, content_type: ["image/jpg","image/jpeg","image/png"]

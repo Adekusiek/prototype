@@ -48,6 +48,21 @@
   <% end %>
 <% end %>
 
-<p></p>
+<h2>Comments</h2>
+<% @event.comments.each do |comment| %>
+  <%= comment.user.nickname %>
+  <%= comment.text %>
+  <% if comment.user == current_user %>
+    <%= link_to "delete", comment_path(comment), method: :delete %>
+  <% end %>
+<% end %>
+
+<div>
+  <%= form_tag(comments_path, method: :post) do %>
+    <textarea cols="30" name="text" placeholder="text" rows="10"></textarea>
+    <input type="hidden" name="event_id" value= "<%= @event.id %>"  >
+    <input type="submit" value="SENT">
+  <% end %>
+</div>
 
 <p><%= link_to 'Back', events_path %></p>

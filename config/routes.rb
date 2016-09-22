@@ -6,15 +6,14 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show, :edit, :update]
   resources :friend_requests
   resources :friendships, only: [:index, :destroy]
+  resources :comments, only: [:create, :destroy]
+
   get 'events/:id/invitation' => 'invitations#index', as: "invitations"
   post 'events/:id/invitation/create' => 'invitations#create', as: "create_invitation"
   get 'events/:id/invitation/new' => 'invitations#new', as: "new_invitation"
   patch 'events/:id/invitation/accept' => 'invitations#accept', as: "accept_invitation"
   patch 'events/:id/invitation/decline' => 'invitations#decline', as: "decline_invitation"
   delete 'events/:id/invitation/destroy' => 'invitations#destroy', as: "destroy_invitation"
-  # post 'user_watches/add' => "user_watches#add", as:"user_watches_add"
-  # delete 'user_watches/remove' => "user_watches#remove", as:"user_watches_remove"
-
   resources :events do
     member do
       post 'add_watches' => "user_watches#add"
