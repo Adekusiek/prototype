@@ -1,16 +1,17 @@
-// this myevent should be outside of (document).ready function so that it wont conflict with invitation.js
-var  myevent = {
-          url: '/events.json'
-        };
+if(typeof gon.url !== 'undefined'){
+var watchedevent = {
+                  url: gon.url + ".json",
+                          };
+    }
 
 $(document).ready(function() {
 
-    $('#calendar').fullCalendar({
+    $('#watchedcalendar').fullCalendar({
 
       header: {
               left: 'prev,next today',
               center: 'title',
-              right: 'month,agendaWeek'
+              right: 'month, agendaWeek, agendaDay'
           },
       eventLimit: true, // allow "more" link when too many events
       eventLimitText:'その他',
@@ -18,6 +19,7 @@ $(document).ready(function() {
 
       //月曜日開始
       firstDay:1,
+
       weekends:true,
       //終日スロットル表示
       allDaySlot:true,
@@ -29,10 +31,11 @@ $(document).ready(function() {
       scrollTime:'16:00:00',
       minTime: "00:00:00", //スケジュールの開始時間
       maxTime: "24:00:00", //スケジュールの最終時間
-
-      // events: '/events.json'
+      // $('#calendarmasu').fullCalendar( 'removeEventSource', myevent )
+      //             .fullCalendar( 'addEventSource', friendevent );;
+      defaultView: 'agendaWeek',
       eventSources: [
-        myevent
+        watchedevent
       ]
     });
 });

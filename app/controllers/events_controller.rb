@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @events = current_user.going_events
   end
 
   # GET /events/1
@@ -34,7 +34,7 @@ class EventsController < ApplicationController
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
-    
+
     @event.invitations.create(user_id: current_user.id, status: "accepted", administrator: true)
   end
 
