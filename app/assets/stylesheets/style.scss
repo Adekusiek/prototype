@@ -3,14 +3,15 @@
   overflow: hidden;
   margin: 20px 15px;
   padding: 0 !important;
-  height: 200px;
   .image {
     background-position: center center;
     background-size: cover;
-    height: 100%;
-    width: 200px;
-    float: left;
   }
+}
+
+.row-eq-height {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 // mixin

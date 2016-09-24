@@ -7,13 +7,13 @@
 <hr>
 
 <h2>Your Recommended Events</h2>
-<div class='row poster'>
+<div class='row poster row-eq-height'>
   <% @rposters.each do |poster| %>
     <div class="col-xs-6 col-lg-4">
-      <div class="image"></div>
+      <div class="image"><img src="<%= poster.image_url %>" alt="No Image"></div>
       <%= link_to poster.title, poster.link_url %>
-      <p>日時 :<%=  poster.date %></p>
-      <p>場所 :<%=  poster.place %></p>
+      <p class='small'>日時 :<%=  poster.date %></p>
+      <p class='small'>場所 :<%=  poster.place %></p>
     </div>
   <% end %>
 </div>
@@ -21,13 +21,13 @@
 <hr>
 
 <h2>Most Liked Events</h2>
-<div class='row poster`'>
+<div class='row poster row-eq-height'>
   <% @likedposters.each do |poster| %>
     <div class="col-xs-6 col-lg-4">
-      <div class="image"></div>
+      <div class="image"><img src="<%= poster.image_url %>" alt="No Image"></div>
       <%= link_to poster.title, poster.link_url %>
-      <p>日時 :<%=  poster.date %></p>
-      <p>場所 :<%=  poster.place %></p>
+      <p class='small'>日時 :<%=  poster.date %></p>
+      <p class='small'>場所 :<%=  poster.place %></p>
     </div>
   <% end %>
 </div>
