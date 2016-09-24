@@ -1,3 +1,35 @@
+<div class='row'>
+  <div id="calendar"></div>
+</div>
+
 <%= link_to "Add New Schedule", new_event_path %>
 
-<div id="calendar"></div>
+<hr>
+
+<h2>Your Recommended Events</h2>
+<div class='row poster'>
+  <% @rposters.each do |poster| %>
+    <div class="col-xs-6 col-lg-4">
+      <div class="image"></div>
+      <%= link_to poster.title, poster.link_url %>
+      <p>日時 :<%=  poster.date %></p>
+      <p>場所 :<%=  poster.place %></p>
+    </div>
+  <% end %>
+</div>
+
+<hr>
+
+<h2>Most Liked Events</h2>
+<div class='row poster`'>
+  <% @likedposters.each do |poster| %>
+    <div class="col-xs-6 col-lg-4">
+      <div class="image"></div>
+      <%= link_to poster.title, poster.link_url %>
+      <p>日時 :<%=  poster.date %></p>
+      <p>場所 :<%=  poster.place %></p>
+    </div>
+  <% end %>
+</div>
+
+<hr>
