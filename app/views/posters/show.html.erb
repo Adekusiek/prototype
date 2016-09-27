@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="image"><img src="<%= @poster.image_url %>" alt="No Image"></div>
+  <%= link_to @poster.title, @poster.link_url %>
+  <p><%=  @poster.detail %></p>
+  <p class='small'>日時 :<%=  @poster.date %></p>
+  <p class='small'>場所 :<%=  @poster.place %></p>
+  <a href= "<%= @poster.link_url %>" target="_blank"><p class='xx-small'>詳しく見る</p></a>
+
+  <hr>
+
+  <%= render 'form' %>
+
+</div>

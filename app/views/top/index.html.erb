@@ -1,3 +1,39 @@
-<%= link_to "Add New Schedule", new_event_path %>
+<div class='row'>
+  <div id="calendar"></div>
+</div>
 
-<div id="calendar"></div>
+<%= link_to "Add New Schedule", new_event_path, class: "btn btn-block" %>
+
+<hr>
+
+<h2>Your Recommended Events</h2>
+<div class='row poster row-eq-height'>
+  <% @rposters.each do |poster| %>
+    <div class="col-xs-6 col-lg-4">
+      <div class="image"><img src="<%= poster.image_url %>" alt="No Image"></div>
+      <%= link_to poster.title, poster.link_url %>
+      <p class='small'>日時 :<%=  poster.date %></p>
+      <p class='small'>場所 :<%=  poster.place %></p>
+      <a href= "<%= poster.link_url %>" target="_blank"><p class='xx-small'>詳しく見る</p></a>
+      <%= link_to "イベントを作る", poster_path(poster.id), class: "xx-small btn btn-xs" %>
+    </div>
+  <% end %>
+</div>
+
+<hr>
+
+<h2>Most Liked Events</h2>
+<div class='row poster row-eq-height'>
+  <% @likedposters.each do |poster| %>
+    <div class="col-xs-6 col-lg-4">
+      <div class="image"><img src="<%= poster.image_url %>" alt="No Image"></div>
+      <%= link_to poster.title, poster.link_url %>
+      <p class='small'>日時 :<%=  poster.date %></p>
+      <p class='small'>場所 :<%=  poster.place %></p>
+      <a href= "<%= poster.link_url %>" target="_blank"><p class='xx-small'>詳しく見る</p></a>
+      <%= link_to "イベントを作る", poster_path(poster.id), class: "xx-small btn btn-xs" %>
+      </div>
+  <% end %>
+</div>
+
+<hr>

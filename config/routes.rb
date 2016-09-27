@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   devise_for :users
   root 'top#index'
   get 'users/search' => 'users#search', as: "users_search"
@@ -7,7 +8,7 @@ Rails.application.routes.draw do
   resources :friend_requests
   resources :friendships, only: [:index, :destroy]
   resources :comments, only: [:create, :destroy]
-
+  resources :posters, only: [:show, :create]
   get 'events/:id/invitation' => 'invitations#index', as: "invitations"
   post 'events/:id/invitation/create' => 'invitations#create', as: "create_invitation"
   get 'events/:id/invitation/new' => 'invitations#new', as: "new_invitation"
