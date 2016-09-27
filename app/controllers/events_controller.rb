@@ -11,7 +11,6 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     @event = Event.find(params[:id])
-    @poster = @event.poster
   end
 
   # GET /events/new
@@ -36,10 +35,6 @@ class EventsController < ApplicationController
         format.html { render :new }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
-    end
-
-    if params[:poster_id]
-      Posterevent.create(event_id: @event.id, poster_id: params[:poster_id])
     end
 
     @event.invitations.create(user_id: current_user.id, status: "accepted", administrator: true)
@@ -77,6 +72,10 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:title, :start, :end, :allDay, :description)
+      if params[:poster_id]
+        params.require(:event).permit(:title, :start, :end, :allDay, :description).merge(poster_id: params[:poster_id], status: "1")
+      else
+        params.require(:event).permit(:title, :start, :end, :allDay, :description)
+      end
     end
 end

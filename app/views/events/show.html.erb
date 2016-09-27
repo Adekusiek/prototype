@@ -1,25 +1,14 @@
-<% if @poster %>
-  <div class="image"><img src="<%= @poster.image_url %>" alt="No Image"></div>
-  <%= link_to @poster.title, @poster.link_url %>
-  <p><%=  @poster.detail %></p>
-  <p class='small'>日時 :<%=  @poster.date %></p>
-  <p class='small'>場所 :<%=  @poster.place %></p>
-  <a href= "<%= @poster.link_url %>" target="_blank"><p class='xx-small'>詳しく見る</p></a>
+<% if @event.status == "1" %>
+  <div class="image"><img src="<%= @event.poster.image_url %>" alt="No Image"></div>
+  <%= link_to @event.poster.title, @event.poster.link_url %>
+  <p><%=  @event.poster.detail %></p>
+  <p class='small'>日時 :<%=  @event.poster.date %></p>
+  <p class='small'>場所 :<%=  @event.poster.place %></p>
+  <a href= "<%= @event.poster.link_url %>" target="_blank"><p class='xx-small'>詳しく見る</p></a>
 <% end %>
-
-
-
-
 
 <p id="notice"><%= notice %></p>
 
-<% if @event.invitations.find_by(user_id: current_user.id, administrator: true) %>
-  <td><%= link_to 'Edit', edit_event_path(@event) %></td>
-  <td><%= link_to 'Destroy', @event, method: :delete %></td>
-<% end %>
-<% if @event.going_users.find_by(id: current_user.id) %>
-  <td><%= link_to 'Add Participants', new_invitation_path(@event) %></td>
-<% end %>
 <% if @event.invitations.exists?(user_id: current_user.id, status: "accepted", administrator: false) %>
   <td><%= link_to 'NotGoin', destroy_invitation_path(@event), method: :delete %></td>
 <% elsif @event.invitations.exists?(user_id: current_user.id, status: "pending", administrator: false) %>
@@ -28,24 +17,31 @@
 <% end %>
 
 <p>
-  <strong>Title:</strong>
+  <strong>イベント名:</strong>
   <%= @event.title %>
 </p>
 
 <p>
-  <strong>Start:</strong>
-  <%= @event.start %>
+  <strong>日時:</strong>
+  <%= @event.start %><%= @event.end %>
 </p>
 
 <p>
-  <strong>End:</strong>
-  <%= @event.end %>
-</p>
-
-<p>
-  <strong>Description:</strong>
+  <strong>詳細:</strong>
   <%= @event.description %>
 </p>
+
+<div>
+  <% if @event.invitations.find_by(user_id: current_user.id, administrator: true) %>
+    <td><%= link_to 'Edit', edit_event_path(@event), class: "btn  btn-xs btn-primary" %></td>
+    <td><%= link_to 'Destroy', @event, method: :delete, class: "btn  btn-xs btn-danger" %></td>
+  <% end %>
+</div>
+<div>
+  <% if @event.going_users.find_by(id: current_user.id) %>
+    <%= link_to 'Add Participants', new_invitation_path(@event), class: "btn btn-xs btn-success" %>
+  <% end %>
+</div>
 
 <% if @event.going_users.exists? %>
   <h2>Participants</h2>
