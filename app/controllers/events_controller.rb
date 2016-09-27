@@ -10,6 +10,8 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
+    @event = Event.find(params[:id])
+    @poster = @event.poster
   end
 
   # GET /events/new
@@ -25,6 +27,7 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(event_params)
+
     respond_to do |format|
       if @event.save
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
@@ -33,6 +36,10 @@ class EventsController < ApplicationController
         format.html { render :new }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
+    end
+
+    if params[:poster_id]
+      Posterevent.create(event_id: @event.id, poster_id: params[:poster_id])
     end
 
     @event.invitations.create(user_id: current_user.id, status: "accepted", administrator: true)

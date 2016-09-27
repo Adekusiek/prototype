@@ -14,4 +14,8 @@ class Event < ActiveRecord::Base
   #for comments on event model
   has_many :comments, ->{ order("created_at ASC")}, dependent: :destroy
 
+  #for poster model
+  # this part needs to be modified. Give event model colomun "status" to give different event kind
+  belongs_to :posterevent, dependent: :destroy
+  delegate :poster, to: :posterevent, allow_nil: true
 end

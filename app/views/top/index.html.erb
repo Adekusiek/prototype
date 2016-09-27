@@ -2,7 +2,7 @@
   <div id="calendar"></div>
 </div>
 
-<%= link_to "Add New Schedule", new_event_path %>
+<%= link_to "Add New Schedule", new_event_path, class: "btn btn-block" %>
 
 <hr>
 
@@ -14,6 +14,8 @@
       <%= link_to poster.title, poster.link_url %>
       <p class='small'>日時 :<%=  poster.date %></p>
       <p class='small'>場所 :<%=  poster.place %></p>
+      <a href= "<%= poster.link_url %>" target="_blank"><p class='xx-small'>詳しく見る</p></a>
+      <%= link_to "イベントを作る", poster_path(poster.id), class: "xx-small btn btn-xs" %>
     </div>
   <% end %>
 </div>
@@ -28,7 +30,9 @@
       <%= link_to poster.title, poster.link_url %>
       <p class='small'>日時 :<%=  poster.date %></p>
       <p class='small'>場所 :<%=  poster.place %></p>
-    </div>
+      <a href= "<%= poster.link_url %>" target="_blank"><p class='xx-small'>詳しく見る</p></a>
+      <%= link_to "イベントを作る", poster_path(poster.id), class: "xx-small btn btn-xs" %>
+      </div>
   <% end %>
 </div>
 
