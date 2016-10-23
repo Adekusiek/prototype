@@ -13,5 +13,6 @@
  *= require_tree .
  *= require bootstrap-material-design
  *= require fullcalendar
+ *= require bootstrap-datetimepicker
  *= require_self
  */

@@ -15,9 +15,16 @@
 //= require twitter/bootstrap
 //= require bootstrap-material-design
 //= require moment
+//= require bootstrap-datetimepicker
 //= require fullcalendar
 //= require_tree .
 
 $(function(){
     $.material.init();
+});
+
+var data = {'data-format': 'YYYY-MM-DD' };
+$(function(){
+  $('.datepicker').attr(data);
+  $('.datepicker').datetimepicker();
 });
