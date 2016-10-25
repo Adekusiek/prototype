@@ -48,4 +48,7 @@ Rails.application.configure do
   #   :password => "kawayui2069 ", #ご自身のgmailアドレスのパスワード
   #   :authentication => 'login'
   # }
+  ENV['FACEBOOK_APP_ID'] = "1813688992243617";
+  ENV['FACEBOOK_SECRET'] = "76df49fb61f71a92dbb05d51ae8a4bce";
+
 end

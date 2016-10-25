@@ -22,9 +22,3 @@
 $(function(){
     $.material.init();
 });
-
-var data = {'data-format': 'YYYY-MM-DD' };
-$(function(){
-  $('.datepicker').attr(data);
-  $('.datepicker').datetimepicker();
-});
