@@ -15,6 +15,7 @@
 //= require twitter/bootstrap
 //= require bootstrap-material-design
 //= require moment
+//= require bootstrap-datetimepicker
 //= require fullcalendar
 //= require_tree .
 

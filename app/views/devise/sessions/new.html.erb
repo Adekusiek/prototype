@@ -30,7 +30,7 @@
           <%= f.submit class: 'btn btn-primary withripple', value: 'ログイン' %>
         </div>
       <% end %>
-
+      <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %>
       <div class='login_link'>
         <%= render 'devise/shared/links' %>
       </div>
